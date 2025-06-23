@@ -4,7 +4,7 @@
 // Configuración WiFi y MQTT
 const char* ssid = "";               // Nombre de la red WiFi
 const char* password = "";           // Contraseña del WiFi
-const char* nombre = ":";            // Nombre/emisor del mensaje
+const char* name = ":";            // Nombre/emisor del mensaje
 
 const char* mqtt_server = "";        // Dirección del broker MQTT
 const int mqtt_port = 1883;          // Puerto estándar para MQTT
@@ -56,9 +56,8 @@ void loop() {
   // Si llega un mensaje por el monitor serial, lo publica por MQTT
   if (Serial.available()) {
     String msg = Serial.readStringUntil('\n');
-    msg = emisor + msg;
+    msg = name + msg;
     client.publish(publish_topic, msg.c_str());
     Serial.println("Mensaje enviado: " + msg);
   }
-}
 }
